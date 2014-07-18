@@ -62,7 +62,7 @@ library
   default-extensions:    UnicodeSyntax, ScopedTypeVariables, RankNTypes
   
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.6 && <4.7,
+  build-depends:       base >=4.6 && <4.8,
                        gloss >=1.8 && <1.9,
                        reactive-banana >=0.7 && <0.8
   
