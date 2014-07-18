@@ -6,6 +6,7 @@ import qualified Graphics.Gloss.Interface.IO.Game as G
 import Reactive.Banana
 import Reactive.Banana.Frameworks
 import Data.IORef (IORef, newIORef, readIORef, writeIORef)
+import System.Exit
 
 -- | A useful type synonym for Gloss event values, to avoid confusion between
 --   Gloss and ReactiveBanana.
@@ -32,9 +33,11 @@ playBanana display colour frequency mPicture = do
   compile (makeNetwork tickHandler eventHandler $ change pictureref) >>= actuate
   playIO display colour frequency ()
     (\      _ → readIORef pictureref)
-    (\ ev   _ → () <$ event ev)
+    (\ ev   _ → quitOnEsc ev >> () <$ event ev)
     (\ time _ → () <$ tick time)
   where
+    quitOnEsc (G.EventKey (G.SpecialKey G.KeyEsc) G.Down _ _) = exitSuccess
+    quitOnEsc _                                               = return ()
     change ∷ IORef Picture → Picture → IO ()
     change pictureref picture = do
       writeIORef pictureref picture
