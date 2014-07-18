@@ -41,6 +41,13 @@ playBanana display colour frequency mPicture = do
     makeNetwork tickHandler eventHandler change = do
       eTick  ← fromAddHandler tickHandler
       eEvent ← fromAddHandler eventHandler
-      bPicture ← mPicture eTick eEvent
+      bRawPicture ← mPicture eTick eEvent
+      
+      -- make sure the Behavior doesn't leak memory if mPicture ignores
+      -- one or both kind of events
+      let bPicture = bRawPicture
+                  <* stepper undefined eTick
+                  <* stepper undefined eEvent
+      
       changes bPicture >>= reactimate . fmap change
       initial bPicture >>= liftIO . change
