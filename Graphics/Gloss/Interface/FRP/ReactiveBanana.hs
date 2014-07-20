@@ -29,15 +29,12 @@ playBanana display colour frequency mPicture = do
   pictureref ← newIORef blank
   (tickHandler,  tick)  ← newAddHandler
   (eventHandler, event) ← newAddHandler
-  compile (makeNetwork tickHandler eventHandler $ change pictureref) >>= actuate
+  compile (makeNetwork tickHandler eventHandler $ writeIORef pictureref) >>= actuate
   playIO display colour frequency ()
     (\      _ → readIORef pictureref)
     (\ ev   _ → () <$ event ev)
     (\ time _ → () <$ tick time)
   where
-    change ∷ IORef Picture → Picture → IO ()
-    change pictureref picture = do
-      writeIORef pictureref picture
     makeNetwork tickHandler eventHandler change = do
       eTick  ← fromAddHandler tickHandler
       eEvent ← fromAddHandler eventHandler
@@ -49,5 +46,5 @@ playBanana display colour frequency mPicture = do
                   <* stepper undefined eTick
                   <* stepper undefined eEvent
       
-      changes bPicture >>= reactimate . fmap change
+      changes bPicture >>= reactimate' . fmap (fmap change)
       initial bPicture >>= liftIO . change

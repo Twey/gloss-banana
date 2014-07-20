@@ -7,7 +7,7 @@ name:                gloss-banana
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.1.0.0
+version:             0.1.0.3
 
 -- A short (one-line) description of the package.
 synopsis:            An Interface for gloss in terms of a reactive-banana Behavior.
@@ -64,7 +64,7 @@ library
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.6 && <4.8,
                        gloss >=1.8 && <1.9,
-                       reactive-banana >=0.7 && <0.8
+                       reactive-banana >=0.8 && <0.9
   
   -- Directories containing source files.
   -- hs-source-dirs:      
