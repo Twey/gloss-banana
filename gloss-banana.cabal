@@ -7,7 +7,7 @@ name:                gloss-banana
 -- PVP summary:      +-+------- breaking API changes
 --                   | | +----- non-breaking API additions
 --                   | | | +--- code changes with no API change
-version:             0.1.0.3
+version:             0.1.0.4
 
 -- A short (one-line) description of the package.
 synopsis:            An Interface for gloss in terms of a reactive-banana Behavior.
@@ -59,7 +59,7 @@ library
   -- other-modules:       
   
   -- LANGUAGE extensions used by modules in this package.
-  default-extensions:    UnicodeSyntax, ScopedTypeVariables, RankNTypes
+  other-extensions:    UnicodeSyntax, RankNTypes
   
   -- Other library packages from which modules are imported.
   build-depends:       base >=4.6 && <4.8,
