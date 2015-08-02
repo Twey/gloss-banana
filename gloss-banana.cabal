@@ -62,7 +62,7 @@ library
   other-extensions:    UnicodeSyntax, RankNTypes
   
   -- Other library packages from which modules are imported.
-  build-depends:       base >=4.6 && <4.8,
+  build-depends:       base >=4.6 && <4.9,
                        gloss >=1.8 && <1.10,
                        reactive-banana >=0.8 && <0.9
   
